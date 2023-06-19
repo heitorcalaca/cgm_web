@@ -1,26 +1,32 @@
 import connectMongo from "@/database/conn";
-import { getMatrizes } from "@/database/controller";
+import { deleteMatrizes, getMatrizes, postMatrizes, putMatrizes } from "@/database/controller";
+
 export default async function handler(req, res) {
-    connectMongo().catch(() => res.status(405).json({ error: "Error in the connection" }))
+    try {
+        await connectMongo(); // Wait for the connection to be established
 
-    const { method } = req
+        const { method } = req;
 
-    switch (method) {
-        case 'GET':
-            getMatrizes(req, res)
-            break;
-        case 'POST':
-            res.status(200).json({ method, name: 'POST Request' });
-            break;
-        case 'PUT':
-            res.status(200).json({ method, name: 'PUT Request' });
-            break;
-        case 'DELETE':
-            res.status(200).json({ method, name: 'DELETE Request' });
-            break;
-        default:
-            res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE'])
-            res.status(405).end(`Method ${method} Not Allowed`)
-            break;
+        switch (method) {
+            case "GET":
+                await getMatrizes(req, res);
+                break;
+            case "POST":
+                await postMatrizes(req, res);
+                break;
+            case "PUT":
+                await putMatrizes(req, res);
+                break;
+            case "DELETE":
+                await deleteMatrizes(req, res);
+                break;
+            default:
+                res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
+                res.status(405).end(`Method ${method} Not Allowed`);
+                break;
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Failed to connect to MongoDB" });
     }
 }
+

@@ -1,6 +1,5 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import connectMongo from '../database/conn'
 
 const inter = Inter({ subsets: ['latin'] })
 
