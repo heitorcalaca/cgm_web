@@ -1,8 +1,8 @@
-import { configerStore } from '@reduxjs/toolkit';
-import Reducer from './reducer'
+import { configureStore } from '@reduxjs/toolkit';
+import reducer from './reducer';
 
-export const store = configerStore({
+export const store = configureStore({
     reducer: {
-        app: Reducer
-    }
-})
+        cgmweb: reducer,
+    },
+});

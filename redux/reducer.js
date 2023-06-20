@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     client: { toggleForm: false }
-}
+};
 
-export const ReducerSlicer = createSlice({
+export const reducerSlice = createSlice({
     name: 'cgmweb',
     initialState,
     reducers: {
-        toogleChangeAction: (state) => {
-            state.client.toggleForm = !state.client.toggleForm
+        toggleChangeAction: (state) => {
+            state.client.toggleForm = !state.client.toggleForm;
         }
     }
-})
+});
 
-export const { toogleChangeAction } = ReducerSlicer.actions
-export default ReducerSlicer.reducer;
+export const { toggleChangeAction } = reducerSlice.actions;
+export default reducerSlice.reducer;

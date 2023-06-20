@@ -1,8 +1,12 @@
 import { BiEdit, BiTrash } from "react-icons/bi"
 import { getUsers } from '@/lib/helper'
 import { useQuery, useQueryClient, } from 'react-query'
+import { useSelector } from 'react-redux'
 
 export default function TabelaMatriz() {
+
+    const state = useSelector((state) => state)
+    console.log(state)
 
     const { isLoading, isError, data, error } = useQuery('matrizes', getUsers)
 
