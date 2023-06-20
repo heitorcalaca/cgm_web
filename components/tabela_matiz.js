@@ -1,7 +1,16 @@
-import dados from '../database/data.json'
 import { BiEdit, BiTrash } from "react-icons/bi"
+import { getUsers } from '@/lib/helper'
+import { useQuery, useQueryClient, } from 'react-query'
 
 export default function TabelaMatriz() {
+
+    const { isLoading, isError, data, error } = useQuery('matrizes', getUsers)
+
+    if (isLoading) return <div className="">Carregando Matrizes...</div>
+    if (isError) return <div>Algo deu errado!</div>
+
+
+
     return (
         <table className="min-w-full table-auto">
             <thead>
@@ -25,7 +34,7 @@ export default function TabelaMatriz() {
             </thead>
             <tbody className="bg-gray-200">
                 {
-                    dados.map((obj, i) => <Tr{...obj} key={i} />)
+                    data.map((obj, i) => <Tr{...obj} key={i} />)
                 }
             </tbody>
         </table>
@@ -35,7 +44,7 @@ export default function TabelaMatriz() {
 function Tr({ id, numero, nome, proprietario, situacao }) {
     return (
         <tr className="bg-gray-50 text-center">
-            <td className="px-16 py-2 flex flex-row items-center">
+            <td className="px-16 py-2">
                 <span className="text-center ml-2 font-semibold">{numero || "Unknown"}</span>
             </td>
             <td className="px-16 py2">

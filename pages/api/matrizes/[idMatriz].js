@@ -1,25 +1,22 @@
 import connectMongo from "@/database/conn";
-import { deleteMatrizes, getMatrizes, postMatrizes, putMatrizes } from "@/database/controller";
+import { deleteMatriz, getMatriz, putMatriz } from "@/database/controller";
 
 export default async function handler(req, res) {
     try {
-        await connectMongo(); // Wait for the connection to be established
+        await connectMongo()
 
         // Type of request
         const { method } = req;
 
         switch (method) {
             case "GET":
-                await getMatrizes(req, res);
-                break;
-            case "POST":
-                await postMatrizes(req, res);
+                await getMatriz(req, res)
                 break;
             case "PUT":
-                await putMatrizes(req, res);
+                await putMatriz(req, res);
                 break;
             case "DELETE":
-                await deleteMatrizes(req, res);
+                await deleteMatriz(req, res);
                 break;
             default:
                 res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
@@ -30,4 +27,3 @@ export default async function handler(req, res) {
         res.status(500).json({ error: "Failed to connect to MongoDB" });
     }
 }
-

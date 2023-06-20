@@ -19,6 +19,27 @@ export async function getMatrizes(req, res) {
     }
 }
 
+// GET: http://localhost:3000/api/matrizes/1
+export async function getMatriz(req, res) {
+    try {
+        const { idMatriz } = req.query;
+
+        if (idMatriz) {
+            const matriz = await Matrizes.findById(idMatriz);
+            if (matriz) {
+                res.status(200).json(matriz);
+            } else {
+                res.status(404).json({ error: "User not found" });
+            }
+        } else {
+            res.status(404).json({ error: "User not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Error while fetching data" });
+    }
+}
+
+
 // POST: http://localhost:3000/api/matrizes
 export async function postMatrizes(req, res) {
     try {

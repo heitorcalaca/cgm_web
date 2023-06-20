@@ -4,6 +4,12 @@ import TabelaMatriz from '@/components/tabela_matiz'
 import FormularioMatriz from '@/components/formulario_matriz'
 import { useState } from 'react'
 
+export const metadata = {
+  title: 'Controle de Gado'
+  ,
+  description: 'Desenvolvido por Calaça Digital',
+}
+
 export default function Home() {
 
   const [visible, setVisible] = useState(false)
@@ -13,6 +19,7 @@ export default function Home() {
   }
 
   return (
+
     <section >
       <main className='py-5'>
         <h1 className='text-xl md:text-5xl text-center font-bold py-10'>Controle de Gado</h1>
