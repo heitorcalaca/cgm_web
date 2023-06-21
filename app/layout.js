@@ -1,13 +1,10 @@
 "use client";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './globals.css';
-import { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
 
 const queryClient = new QueryClient();
-
-
 
 const RootLayout = ({ children, component, pageProps }) => {
   return (
@@ -24,7 +21,6 @@ const RootLayout = ({ children, component, pageProps }) => {
             {children}
           </body>
         </html>
-        {Component && <component {...pageProps} />}
       </Provider>
     </QueryClientProvider>
   );
