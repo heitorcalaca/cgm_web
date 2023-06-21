@@ -1,14 +1,12 @@
 import { BiEdit, BiTrash } from "react-icons/bi"
-import { getUsers } from '@/lib/helper'
+import { getMatrizes } from '@/lib/helper'
 import { useQuery, useQueryClient, } from 'react-query'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleChangeAction } from "@/redux/reducer"
 
 export default function TabelaMatriz() {
 
-    const state = useSelector((state) => state)
-    console.log(state)
-
-    const { isLoading, isError, data, error } = useQuery('matrizes', getUsers)
+    const { isLoading, isError, data, error } = useQuery('matrizes', getMatrizes)
 
     if (isLoading) return <div className="">Carregando Matrizes...</div>
     if (isError) return <div>Algo deu errado!</div>
@@ -45,7 +43,17 @@ export default function TabelaMatriz() {
     )
 }
 
+
 function Tr({ id, numero, nome, proprietario, situacao }) {
+
+    const visible = useSelector((state) => state.app.client.toggleForm)
+    const dispatch = useDispatch()
+
+    const onUpdate = () => {
+        dispatch(toggleChangeAction())
+        console.log(visible)
+    }
+
     return (
         <tr className="bg-gray-50 text-center">
             <td className="px-16 py-2">
@@ -61,7 +69,7 @@ function Tr({ id, numero, nome, proprietario, situacao }) {
                 <span>{situacao || "Unknown"}</span>
             </td>
             <td className="px-16 py-2 flex justify-around gap-5">
-                <button className="cursor"> <BiEdit size={25} color="rgb(34,197,94)" /></button>
+                <button className="cursor" onClick={onUpdate}> <BiEdit size={25} color="rgb(34,197,94)" /></button>
                 <button className="cursor"> <BiTrash size={25} color="rgb(244,63,94)" /> </button>
             </td>
         </tr>

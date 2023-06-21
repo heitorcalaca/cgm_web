@@ -1,8 +1,11 @@
 "use client"
-
 import { useReducer } from "react"
 import Sucesso from "./sucesso"
 import Erro from "./erro"
+import { useQueryClient, useMutation } from "react-query"
+import { addMatriz, getMatrizes } from "@/lib/helper"
+
+
 const formReducer = (state, event) => {
     return {
         ...state,
@@ -12,15 +15,38 @@ const formReducer = (state, event) => {
 
 export default function FormularioAddMatriz() {
 
+    const queryClient = useQueryClient()
+
     const [formData, setFormData] = useReducer((formReducer), {})
+    const addMutation = useMutation(addMatriz, {
+        onSuccess: () => {
+            queryClient.prefetchQuery('matrizes', getMatrizes)
+        }
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (Object.keys(formData).length == 0) return console.log("Formulário sem dados")
-        console.log(formData)
+        let { numero, nome, caracteristica, dataNascimento, proprietario, situacao, nomePai, situacaoMae, nomeMae } = formData;
+
+        const model = {
+            numero,
+            nome,
+            caracteristica,
+            dataNascimento,
+            proprietario,
+            situacao,
+            nomePai,
+            situacaoMae,
+            nomeMae
+        }
+
+        addMutation.mutate(model)
     }
 
-    // if (Object.keys(formData).length > 0) return <Sucesso message={"Matriz adicionada com Sucesso"}></Sucesso >
+    if (addMutation.isLoading) return <div>Loading...</div>
+    if (addMutation.isError) return <Erro message={addMutation.error.message}></Erro>
+    if (addMutation.isSuccess) return <Sucesso message={"Matriz Adicionada com Sucesso!"}></Sucesso>
 
     return (
         < form onSubmit={handleSubmit}>
@@ -44,7 +70,7 @@ export default function FormularioAddMatriz() {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="car" >
                             Característica
                         </label>
-                        <select id="car" name="características" onChange={setFormData} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" >
+                        <select id="car" name="caracteristica" onChange={setFormData} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" >
                             <option defaultValue={0}>Selecione a Característica</option>
                             <option value="Amarela">Amarela</option>
                             <option value="Amarela Mocha">Amarela Mocha</option>

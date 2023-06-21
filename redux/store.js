@@ -3,6 +3,8 @@ import reducer from './reducer';
 
 export const store = configureStore({
     reducer: {
-        cgmweb: reducer,
+        app: reducer,
     },
 });
+
+export default store

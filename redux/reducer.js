@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export const reducerSlice = createSlice({
-    name: 'cgmweb',
+    name: 'app',
     initialState,
     reducers: {
         toggleChangeAction: (state) => {
