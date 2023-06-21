@@ -7,10 +7,7 @@ import store from '@/redux/store';
 
 const queryClient = new QueryClient();
 
-export const metadata = {
-  title: 'Controle de Gado',
-  description: 'Desenvolvido por Calaça Digital',
-};
+
 
 const RootLayout = ({ children, component, pageProps }) => {
   return (
