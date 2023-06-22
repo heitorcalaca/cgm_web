@@ -4,6 +4,7 @@ import TabelaMatriz from '@/components/tabela_matiz';
 import FormularioMatriz from '@/components/formulario_matriz';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleChangeAction } from '@/redux/reducer';
+import { useState } from 'react';
 
 export default function Home() {
 
@@ -12,11 +13,10 @@ export default function Home() {
 
   const handler = () => {
     dispatch(toggleChangeAction())
+
   };
 
   return (
-
-
     <section>
 
       <main className='py-5'>

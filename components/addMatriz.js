@@ -6,21 +6,12 @@ import { useQueryClient, useMutation } from "react-query"
 import { addMatriz, getMatrizes } from "@/lib/helper"
 
 
-const formReducer = (state, event) => {
-    return {
-        ...state,
-        [event.target.name]: event.target.value
-    }
-}
-
-export default function FormularioAddMatriz() {
+export default function FormularioAddMatriz({ formData, setFormData }) {
 
     const queryClient = useQueryClient()
-
-    const [formData, setFormData] = useReducer((formReducer), {})
     const addMutation = useMutation(addMatriz, {
         onSuccess: () => {
-            queryClient.prefetchQuery('matrizes', getMatrizes)
+            queryClient.prefetchQuery('matriz', getMatrizes)
         }
     })
 

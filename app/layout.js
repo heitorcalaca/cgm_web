@@ -6,7 +6,7 @@ import store from '@/redux/store';
 
 const queryClient = new QueryClient();
 
-const RootLayout = ({ children, component, pageProps }) => {
+const RootLayout = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

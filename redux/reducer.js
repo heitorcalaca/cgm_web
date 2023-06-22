@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    client: { toggleForm: false }
+    client: { toggleForm: false, formId: undefined }
 };
 
 export const reducerSlice = createSlice({
@@ -10,9 +10,13 @@ export const reducerSlice = createSlice({
     reducers: {
         toggleChangeAction: (state) => {
             state.client.toggleForm = !state.client.toggleForm;
+        },
+
+        updateAction: (state, action) => {
+            state.client.formId = action.payload;
         }
     }
 });
 
-export const { toggleChangeAction } = reducerSlice.actions;
+export const { toggleChangeAction, updateAction } = reducerSlice.actions;
 export default reducerSlice.reducer;

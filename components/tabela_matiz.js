@@ -2,7 +2,7 @@ import { BiEdit, BiTrash } from "react-icons/bi"
 import { getMatrizes } from '@/lib/helper'
 import { useQuery, useQueryClient, } from 'react-query'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleChangeAction } from "@/redux/reducer"
+import { toggleChangeAction, updateAction } from "@/redux/reducer"
 
 export default function TabelaMatriz() {
 
@@ -44,14 +44,16 @@ export default function TabelaMatriz() {
 }
 
 
-function Tr({ id, numero, nome, proprietario, situacao }) {
+function Tr({ _id, numero, nome, proprietario, situacao }) {
 
     const visible = useSelector((state) => state.app.client.toggleForm)
     const dispatch = useDispatch()
 
     const onUpdate = () => {
         dispatch(toggleChangeAction())
-        console.log(visible)
+        if (visible) {
+            dispatch(updateAction(_id))
+        }
     }
 
     return (
