@@ -4,7 +4,8 @@ import TabelaMatriz from '@/components/tabela_matiz';
 import FormularioMatriz from '@/components/formulario_matriz';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleChangeAction } from '@/redux/reducer';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import connectMongo from '@/database/conn';
 
 export default function Home() {
 
@@ -13,8 +14,13 @@ export default function Home() {
 
   const handler = () => {
     dispatch(toggleChangeAction())
-
   };
+
+  useEffect(() => {
+    connectMongo()
+      .then(() => console.log('Connected to MongoDB'))
+      .catch((error) => console.error('Fail to connect to MongoDB:', error))
+  }, [])
 
   return (
     <section>
@@ -43,3 +49,4 @@ export default function Home() {
 
   );
 }
+
