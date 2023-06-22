@@ -1,4 +1,6 @@
-import { Schema, models, model } from 'mongoose'
+import mongoose from 'mongoose';
+import { Schema, models, model } from 'mongoose';
+
 
 const matrizSchema = new Schema({
     numero: Number,
@@ -13,5 +15,5 @@ const matrizSchema = new Schema({
 
 })
 
-const Matrizes = models.matriz || model('matriz', matrizSchema)
+const Matrizes = model('matriz', matrizSchema)
 export default Matrizes;

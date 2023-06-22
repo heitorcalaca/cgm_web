@@ -18,6 +18,7 @@ export default function FormularioUpdateMatriz({ formId, formData, setFormData }
     const { numero, nome, caracteristica, dataNascimento, proprietario, situacao, nomePai, situacaoMae, nomeMae } = data
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
         if (Object.keys(formData).length == 0) return console.log("Formulário sem dados")
         console.log(formData)

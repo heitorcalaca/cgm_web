@@ -1,7 +1,7 @@
 
 /** Controller */
 
-import Matrizes from "@/model/matriz"
+import Matrizes from "../model/matriz"
 
 // GET: http://localhost:3000/api/matrizes
 export async function getMatrizes(req, res) {
