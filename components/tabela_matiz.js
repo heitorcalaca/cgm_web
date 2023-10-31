@@ -8,6 +8,8 @@ export default function TabelaMatriz() {
 
     const { isLoading, isError, data, error } = useQuery('matriz', getMatrizes)
 
+
+
     if (isLoading) return <div className="">Carregando Matrizes...</div>
     if (isError) return <div>Algo deu errado!</div>
 

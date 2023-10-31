@@ -5,6 +5,8 @@ export default async function handler(req, res) {
     try {
         await connectMongo(); // Wait for the connection to be established
 
+  
+
         // Type of request
         const { method } = req;
 
